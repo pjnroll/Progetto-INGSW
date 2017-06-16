@@ -7,7 +7,6 @@ session_start();
 	<head>
 		<title>IoT</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/stili.css" rel="stylesheet">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<script src="js/lib/jquery.js"></script>
 		<script src="js/lib/bootstrap.min.js"></script>
