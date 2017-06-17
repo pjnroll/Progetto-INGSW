@@ -21,21 +21,21 @@
 
                 // Se l'utente è amministratore
                 if ($_SESSION["UTENTE"]["isAdmin"] == 1)
-                    header('Location: '.pannelloamministratore.php);
+                    header('Location: pannelloamministratore.php');
                 // Se non lo è
                 else
-                    header('Location: '.areaclienti.php);
+                    header('Location: areaclienti.php');
 
             }
             // Se non è proprio loggato
-            header('Location: '.index.php?login=failed);
+            header('Location: index.php?login=failed');
             ob_end_flush();
             die();
         }
 
         function logout() {
             session_destroy();
-            redireziona();
+            $this->redireziona();
         }
 
 
