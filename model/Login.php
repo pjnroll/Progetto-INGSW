@@ -1,43 +1,33 @@
 <?php
-    session_start();
     class Login {
-        private $utente;
+        //@TODO: ELIMINARE dai diagrammi la presenza di Utente nel Login e verificare
         private $db;
-
         function __construct($DB, $Utente) {
             $this->db = $DB;
-            $this->utente = $Utente;
         }
 
         function verifica($emailAddress, $password) {
             $password = sha1(password);
-
             // Preparo ed eseguo la query
-            $this->db->prepare("SELECT * FROM Utente WHERE Email = :emailAddress AND Password = :password");
-            $this->db->bindParam(':emailAddress', $emailAddress);
-            $this->db->bindParam(':password', $password);
-            $this->db->execute();
+            $parametri = array();
+            $parametri[':emailAddress'] = $emailAddress;
+            $parametri[':password'] = $password;
 
-            $result = $this->db->fetch(PDO::FETCH_OBJ);
-
-            // Se non è stato trovato
-            if ($result) {
-                $this->utente->riempi($result);
-            }
+            $result = $this->db->query("SELECT * FROM Utente WHERE Email = :emailAddress AND Password = :password", $parametri);
+            return ($result) ? $result : false;
         }
 
-        function redireziona() {
+        function redireziona($param) {
             ob_start();
-            if (isset($_SESSION["UTENTE"])) {
-
-                // Se l'utente è amministratore o meno
-                if ($this->utente->isAdmin())
-                    header('Location: pannelloamministratore.php');
-                else
-                    header('Location: areaclienti.php');
-            }
-            // Se non è proprio loggato
-            header('Location: index.php?login=failed');
+            // Se l'utente è amministratore
+            if ($param == 1)
+                header('Location: /index.php?action=pannelloamministratore');
+            // Se è un cliente
+            else if ($param == 0)
+                header('Location: /index.php?action=areaclienti');
+            //Se non è proprio loggato
+            else if ($param == -1)
+                header('Location: /index.php?action=loginfailed');
             ob_end_flush();
             die();
         }

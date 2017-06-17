@@ -10,8 +10,16 @@
             return self::$_instance;
         }
 
-        public function query($sql) {
-            return query($this->_db,$sql);
+        //@TODO cambiare anche nel diagramma delle classi il secondo parametro!
+
+        // Metodo per gestire le query, a cui viene passata la query parametrizzata e le variabili da inserire nei param
+        public function query($sql, $varset) {
+            $statement = $this->_db->prepare($sql);
+            // Esegue query
+            $statement->execute($varset);
+            // Restituisce il risultato sotto-forma di oggetto
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
         }
 
         public function __construct($server = "", $username = "", $password = "", $db = "") {
@@ -26,6 +34,7 @@
             }
 
             $this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->_db->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
         }
     }
 ?>

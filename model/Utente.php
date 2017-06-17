@@ -1,4 +1,5 @@
 <?php
+session_start();
 class Utente {
     private $ID = 0;
     private $Nome;
@@ -12,14 +13,7 @@ class Utente {
     private $Email;
     private $Password;
     private $isAdmin;
-
-    private $DB;
-    private $ref_table;
-
-    public function __construct($DB, $id_user = false){
-        $this->DB = $DB;
-        $this->ref_table = "Utente";
-    }
+// @TODO: eliminare isLogged come metodo, basta fare _get(isAdmin)!
 
     public function __get($var) {
         return $this->$var;
@@ -30,13 +24,10 @@ class Utente {
     }
 
     public function riempi($datiUtente) {
-
-        // Scorro l'oggetto che consiste nella riga del db, e per ogni relativa colonna (che corrisponde al nome
-        // degli attributi dell'oggetto Utente, inserisco i relativi valori.
+        // Per ogni indice che corrisponde al nome degli attributi dell'oggetto Utente, inserisco i relativi valori.
 
         foreach ($datiUtente as $key => $value) {
-            $this->$key = $value;
-            $_SESSION["UTENTE"][$key] = $value;
+            $this->__set($key, $value);
         }
     }
 
@@ -46,7 +37,7 @@ class Utente {
     }
 
     public function isAdmin() {
-        if (isset($this->isAdmin) AND $this->isAdmin == 1) return true;
+        if ($this->isAdmin == 1 ) return true;
         else return false;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+    session_start();
     // Quando la pagina login viene chiamata da index, non avrà alcun parametro 'action'.
     // Quando l'utente farà l'azione di login inviando i suoi dati, verrà notificato il tutto a questa stessa pagina
     // e in questo punto specifico utilizziamo i metodi della classe Login
@@ -9,12 +10,28 @@
 
     $db = ManagerDB::getInstance();
     $utente = new Utente($db);
-    if($_GET['action'] == 'verificaLogin') {
-        $login = new Login($db, $utente);
-        $login->verifica($_POST['login-mail'], $_POST['login-password']);
-    }
+    $login = new Login($db, $utente);
 
+    if (isset($_SESSION["UTENTE"])) {
+        $login->redireziona($_SESSION["UTENTE"]["isAdmin"]);
+    }else {
+        if ($_GET['action'] == 'verificaLogin') {
+            $email = $_POST['login-mail'];
+            $password = $_POST['login-password'];
+            $result = $login->verifica($email, $password);
+
+            // Se è andato a buon fine il login:
+            if (!$result) {
+                $login->redireziona(-1);
+            } else {
+                $utente->riempi($result);
+                $_SESSION["UTENTE"] = $result;
+                $login->redireziona($utente->__get(isAdmin));
+            }
+        }
+    }
 ?>
+
 <div class="row"><br></div>
 <div id="loginDIV" class="row col-md-4 col-lg-4 col-xs-12 col-sm-6 col-lg-offset-4" style="border: 1px dotted black">
     <div class="row">
@@ -26,17 +43,17 @@
     <div class="row">
         <div  style="margin-top:0px;" class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
             <br/>
-            <form method="POST" action="pagine/login.php?action=verificaLogin" >
+            <form method="POST" action="/pagine/login.php?action=verificaLogin" >
                 <span id="msg"></span>
                 <div class="form-group">
                     <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
-                        <input class="form-control" type="text" id="login-mail" placeholder="E-mail">
+                        <input class="form-control" type="text" name="login-mail" placeholder="E-mail">
                     </div>
                 </div>
                 <br /><br />
                 <div class="form-group">
                     <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
-                        <input class="form-control" type="password" id="login-password" placeholder="Password">
+                        <input class="form-control" type="password" name="login-password" placeholder="Password">
                     </div>
                 </div>
                 <br />
