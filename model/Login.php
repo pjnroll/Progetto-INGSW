@@ -29,7 +29,6 @@
             else if ($param == -1)
                 header('Location: /index.php?action=loginfailed');
             ob_end_flush();
-            die();
         }
 
         function logout() {
