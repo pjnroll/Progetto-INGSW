@@ -1,5 +1,10 @@
 <?php
+
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+ini_set('display_errors', '1');
+date_default_timezone_set('Europe/Rome');
 session_start();
+
 require_once 'model/ManagerDB.php';
 require_once 'model/Login.php';
 require_once 'model/Utente.php';
