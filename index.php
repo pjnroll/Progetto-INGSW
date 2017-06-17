@@ -11,7 +11,7 @@ require_once 'model/Utente.php';
 
 $db = ManagerDB::getInstance();
 
-$utente = Utente($db);
+$utente = Utente();
 $login = Login($db, $utente);
 
 // Pagina index della piattaforma. Verifica inizialmente se l'user è loggato, in caso negativo lo forza a loggarsi,
