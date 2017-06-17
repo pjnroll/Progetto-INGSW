@@ -9,8 +9,9 @@ require_once 'model/ManagerDB.php';
 require_once 'model/Login.php';
 require_once 'model/Utente.php';
 
-$db = Database::getInstance();
-$utente = Utente();
+$db = ManagerDB::getInstance();
+
+$utente = Utente($db);
 $login = Login($db, $utente);
 
 // Pagina index della piattaforma. Verifica inizialmente se l'user è loggato, in caso negativo lo forza a loggarsi,
