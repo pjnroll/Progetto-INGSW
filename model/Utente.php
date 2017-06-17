@@ -1,16 +1,16 @@
 <?php
 class Utente {
     private $ID = 0;
-    private $nome;
-    private $cognome;
-    private $luogoDiNascita;
-    private $dataDiNascita;
-    private $sesso;
-    private $residenza;
-    private $numeroDiTelefono;
-    private $codiceFiscale;
-    private $email;
-    private $password;
+    private $Nome;
+    private $Cognome;
+    private $LuogoDiNascita;
+    private $DataDiNascita;
+    private $Sesso;
+    private $Residenza;
+    private $NumeroDiTelefono;
+    private $CodiceFiscale;
+    private $Email;
+    private $Password;
     private $isAdmin;
 
     private $DB;
