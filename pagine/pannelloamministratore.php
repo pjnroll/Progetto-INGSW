@@ -16,6 +16,9 @@
                 <li role="presentation" class="active">
                     <a href="#clienti" aria-controls="clienti" role="tab" data-toggle="tab">Clienti</a>
                 </li>
+                <li role="presentation" class="active">
+                    <button class="btn btn-danger" style="margin-top:5px">Logout</button>
+                </li>
             </ul>
         </li>
         <li class="list-group-item col-md-12 col-lg-12" style="border-top:none;">
