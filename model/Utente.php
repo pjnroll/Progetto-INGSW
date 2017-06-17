@@ -19,8 +19,6 @@ class Utente {
     public function __construct($DB, $id_user = false){
         $this->DB = $DB;
         $this->ref_table = "Utente";
-
-        $this->riempi($id_user);
     }
 
     public function __get($var) {

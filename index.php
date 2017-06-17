@@ -5,15 +5,6 @@ ini_set('display_errors', '1');
 date_default_timezone_set('Europe/Rome');
 session_start();
 
-require_once 'model/ManagerDB.php';
-require_once 'model/Login.php';
-require_once 'model/Utente.php';
-
-$db = ManagerDB::getInstance();
-
-$utente = Utente();
-$login = Login($db, $utente);
-
 // Pagina index della piattaforma. Verifica inizialmente se l'user è loggato, in caso negativo lo forza a loggarsi,
 // altrimenti a seconda del suo ruolo mostra l'area clienti o il pannello di amministrazione.
 ?>
@@ -30,7 +21,8 @@ $login = Login($db, $utente);
     </head>
 	
 	<body>
-		<div id = "maindiv">
-		</div>
-	</body>
+    <div class="container">
+        <?php include('pagine/login.php'); ?>
+    </div>
+    </body>
 </html>
