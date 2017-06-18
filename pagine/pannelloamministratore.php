@@ -95,7 +95,8 @@ function gestisciClienti() {
                                                     $utente->__set($key, $value);
                                                 }
                                                 $result = $amministrazioneCliente->aggiungiCliente($utente);
-                                                var_dump($result);
+                                                if ($result == -1)
+                                                    echo "<span style='color:red'>Errore nell'inserimento dati.</span>";
                                                 $amministrazioneCliente->trovaClienti();
                                                 gestisciClienti();
                                                 break;
@@ -176,7 +177,7 @@ function gestisciClienti() {
                         <div class="form-group" id="div_sesso">
                             <label for="data" class="col-sm-2 control-label">Sesso</label>
                             <div class="col-sm-4">
-                                <select name="sesso">
+                                <select name="Sesso">
                                     <option id="M">M</option>
                                     <option id="F">F</option>
                                 </select>

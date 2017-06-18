@@ -11,7 +11,7 @@ class AmministrazioneCliente {
 
     public function aggiungiCliente($utente) {
         if ($this->validaEmailPassword($utente->__get("Email"), $utente->__get("Password"))) {
-            $query = "INSERT INTO utente (Nome,Cognome,Email,DataDiNascita,Sesso,Residenza,LuogoDiNascita,NumeroDiTelefono,Codicefiscale,Password,isAdmin) VALUES (:Nome,:Cognome,:Email,:DataDiNascita,:Sesso,:Residenza,:LuogoDiNascita,:NumeroDiTelefono,:Codicefiscale,:Password, 0)";
+            $query = "INSERT INTO utente (Nome,Cognome,Email,DataDiNascita,Sesso,Residenza,LuogoDiNascita,NumeroDiTelefono,CodiceFiscale,Password,isAdmin) VALUES (:Nome,:Cognome,:Email,:DataDiNascita,:Sesso,:Residenza,:LuogoDiNascita,:NumeroDiTelefono,:CodiceFiscale,:Password, 0)";
             $param = array();
             $param[':Nome'] = $utente->__get("Nome");
             $param[':Cognome'] = $utente->__get("Cognome");
@@ -20,13 +20,11 @@ class AmministrazioneCliente {
             $param[':DataDiNascita'] = $utente->__get("DataDiNascita");
             $param[':Sesso'] = $utente->__get("Sesso");
             $param[':Residenza'] = $utente->__get("Residenza");
-            $param[':NumeroDiTelefono'] = $utente->__get("NumeroDiTelefono");
+            $param[':NumeroDiTelefono'] = (int)$utente->__get("NumeroDiTelefono");
             $param[':CodiceFiscale'] = $utente->__get("CodiceFiscale");
             $param[':Email'] = $utente->__get("Email");
             $param[':Password'] = md5($utente->__get("Password"));
-            var_dump($param);
             $this->db->query($query, $param);
-            return "ok";
         } else
             return -1;
     }
