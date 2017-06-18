@@ -26,7 +26,7 @@ function gestisciClienti() {
     if (!count($lista_utenti) == 0) {
         foreach ($lista_utenti as $utente) {
             echo "<tr>";
-            echo "<td><button class=\"btn\" id=\'" . $utente->__get("ID") . "\>" . $utente->__get("Nome") . " " . $utente->__get("Cognome") . "</button></td>";
+            echo "<td><button class=\"btn\" id='" . $utente->__get("ID") . "'>" . $utente->__get("Nome") . " " . $utente->__get("Cognome") . "</button></td>";
             echo "<td>" . $utente->__get("Residenza") . "</td>";
             echo "<td>" . $utente->__get("LuogoDiNascita") . "</td>";
             echo "<td>" . $utente->__get("DataDiNascita") . "</td>";
