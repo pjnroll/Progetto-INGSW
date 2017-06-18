@@ -17,7 +17,7 @@
                     <a href="#clienti" aria-controls="clienti" role="tab" data-toggle="tab">Clienti</a>
                 </li>
                 <li role="presentation" class="active">
-                    <button class="btn btn-danger" style="margin-top:5px">Logout</button>
+                    <button style='margin-top:3px' type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modal_cliente"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Aggiungi</button>
                 </li>
             </ul>
         </li>
@@ -40,7 +40,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr><td>Gabriele Pisciotta</td>
+                        <tr><td><button class="btn">Gabriele Pisciotta</button></td>
                             <td>Via Cappelluti</td>
                             <td>Bari</td>
                             <td>03-05-1996</td>
@@ -70,4 +70,89 @@
 </div>
 </li>
 </ul>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal_cliente" tabindex="-1" role="dialog" aria-labelledby="modal_cliente" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Aggiungi cliente</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method = "post">
+                    <div class="form-group" id="div_nome">
+                        <label for="nome" class="col-sm-2 control-label">Nome</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="nome" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group" id="div_descrizione">
+                        <label for="descrizione" class="col-sm-2 control-label">Cognome</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="cognome" placeholder=""></input>
+                        </div>
+                    </div>
+                    <div class="form-group" id="div_luogonascita">
+                        <label for="quantita" class="col-sm-2 control-label">Luogo di nascita</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="luogodinascita" placeholder="Bari"></input>
+                        </div>
+                    </div>
+                    <div class="form-group" id="div_datadinascita">
+                        <label for="quantita" class="col-sm-2 control-label">Data di nascita</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="quantita" placeholder="03/05/1996"></input>
+                        </div>
+                    </div>
+                    <div class="form-group" id="div_residenza">
+                        <label for="quantita" class="col-sm-2 control-label">Residenza</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="residenza" placeholder="Bari"></input>
+                        </div>
+                    </div>
+                    <div class="form-group" id="div_sesso">
+                        <label for="data" class="col-sm-2 control-label">Sesso</label>
+                        <div class="col-sm-4">
+                            <select id="sesso">
+                                <option id="M">M</option>
+                                <option id="F">F</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="div_numeroditelefono">
+                        <label for="quantita" class="col-sm-2 control-label">Numero di telefono</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="numeroditelefono" placeholder="3391358719"></input>
+                        </div>
+                    </div>
+                    <div class="form-group" id="div_codicefiscale">
+                        <label for="quantita" class="col-sm-2 control-label">Codice fiscale</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="codicefiscale" placeholder="PSCGRL39A03A662Q"></input>
+                        </div>
+                    </div>
+                    <div class="form-group" id="div_email">
+                        <label for="quantita" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="email" placeholder="admin@info.it"></input>
+                        </div>
+                    </div>
+                    <div class="form-group" id="div_password">
+                        <label for="quantita" class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password" placeholder=""></input>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+                <button id="btnAdd" type="button" class="btn btn-primary">Aggiungi</button>
+            </div>
+        </div>
+    </div>
 </div>

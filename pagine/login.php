@@ -18,8 +18,9 @@
         if ($_GET['action'] == 'verificaLogin') {
             $email = $_POST['login-mail'];
             $password = $_POST['login-password'];
-            $result = $login->verifica($email, $password);
 
+            $result = $login->verifica($email, $password);
+            echo $result["ID"];
             // Se è andato a buon fine il login:
             if (!$result) {
                 $login->redireziona(-1);
@@ -28,6 +29,7 @@
                 $_SESSION["UTENTE"] = $result;
                 $login->redireziona($utente->__get(isAdmin));
             }
+
         }
     }
 ?>
@@ -57,8 +59,14 @@
                     </div>
                 </div>
                 <br />
-                <div id="errore" class="form-group" style="display:none; text-align:center;" role="alert">
-                    <span class="text-danger" id="login-response"></span>
+
+                <div id="errore" class="form-group" style="text-align:center;" role="alert">
+                    <span class="text-danger" id="login-response">
+                        <?php
+                            if (isset($_GET['action']) && $_GET['action'] == 'loginfailed')
+                                echo 'Errore, dati inseriti non validi.';
+                        ?>
+                    </span>
                 </div>
                 <br />
 

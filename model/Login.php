@@ -7,15 +7,18 @@
             $this->db = $DB;
         }
 
-        function verifica($emailAddress, $password) {
-            $password = sha1(password);
+        function verifica($emailAddress, $password_) {
+            $password = hash('sha256', $password_);
+
             // Preparo ed eseguo la query
             $parametri = array();
             $parametri[':emailAddress'] = $emailAddress;
             $parametri[':password'] = $password;
-
             $result = $this->db->query("SELECT * FROM Utente WHERE Email = :emailAddress AND Password = :password", $parametri);
-            return ($result) ? $result : false;
+            var_dump($result);
+            if (isset($result) && ($result["ID"] > 0))
+                return $result;
+            else return false;
         }
 
         function redireziona($param) {
