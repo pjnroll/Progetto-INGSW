@@ -16,4 +16,10 @@ class Sito
         $this->$var = $val;
     }
 
+    public function riempi($datiSito) {
+        // Per ogni indice che corrisponde al nome degli attributi dell'oggetto Sito, inserisco i relativi valori.
+        foreach ($datiSito as $key => $value) {
+            $this->__set($key, $value);
+        }
+    }
 }
