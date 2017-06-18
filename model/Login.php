@@ -2,7 +2,8 @@
     class Login {
         //@TODO: ELIMINARE dai diagrammi la presenza di Utente nel Login e verificare
         private $db;
-        function __construct($DB, $Utente) {
+
+        function __construct($DB) {
             $this->db = $DB;
         }
 

@@ -27,18 +27,18 @@ date_default_timezone_set('Europe/Rome');
         if (isset($_SESSION["UTENTE"])) {
             switch ($_GET['action']) {
                 case "areaclienti" :
-                    include("pagine/areaclienti.php");
+                    include 'pagine/areaclienti.php';
                     break;
                 case "pannelloamministratore" :
-                    include("pagine/pannelloamministratore.php");
+                    include 'pagine/pannelloamministratore.php';
                     break;
                 default:
                     if ($_SESSION["UTENTE"]["isAdmin"] == "0")
-                        include("pagine/areaclienti.php");
-                    else include("pagine/pannelloamministratore.php");
+                        include 'pagine/areaclienti.php';
+                    else include 'pagine/pannelloamministratore.php';
             }
         } else {
-            include("pagine/login.php");
+            include 'pagine/login.php';
         }
          ?>
     </div>

@@ -13,7 +13,7 @@ class Utente {
     private $Email;
     private $Password;
     private $isAdmin;
-// @TODO: eliminare isLogged come metodo, basta fare _get(isAdmin)!
+// @TODO: eliminare isAdmin come metodo, basta fare _get(isAdmin)!
 
     public function __get($var) {
         return $this->$var;
