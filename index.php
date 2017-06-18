@@ -15,9 +15,6 @@ date_default_timezone_set('Europe/Rome');
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-        <!-- Optional theme
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
--->
         <!-- jquery -->
         <script src="css/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 
@@ -38,14 +35,14 @@ date_default_timezone_set('Europe/Rome');
                     include 'pagine/areaclienti.php';
                     break;
                 case "pannelloamministratore" :
-                    include 'pagine/pannelloamministratore.php';
+                    include 'pagine/interfacciaamministratore.php';
                     break;
                 // Se non viene esplicitamente chiesta la pagina, viene mostrata la pagina principale relativa
                 default:
                     if ($_SESSION["UTENTE"]["isAdmin"] == "0")
                         include 'pagine/areaclienti.php';
                     else
-                        include 'pagine/pannelloamministratore.php';
+                        include 'pagine/interfacciaamministratore.php';
             }
         }
         // Altrimenti se non è loggato, accedi al login o nel caso in cui è stato già tentato, accedi alla pagina con errore

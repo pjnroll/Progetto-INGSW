@@ -10,7 +10,7 @@
 
     $db = ManagerDB::getInstance();
     $utente = new Utente($db);
-    $login = new Login($db, $utente);
+    $login = new Login($db);
 
     if (isset($_SESSION["UTENTE"])) {
         $login->redireziona($_SESSION["UTENTE"]["isAdmin"]);
@@ -20,9 +20,10 @@
             $password = $_POST['login-password'];
             $result = $login->verifica($email, $password);
             echo $result["ID"];
+
             // Se è andato a buon fine il login:
             if (!$result) {
-                #$login->redireziona(-1);
+                $login->redireziona(-1);
             } else {
                 $utente->riempi($result);
                 $_SESSION["UTENTE"] = $result;
