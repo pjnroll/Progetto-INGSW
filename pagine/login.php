@@ -19,10 +19,9 @@
             $email = $_POST['login-mail'];
             $password = $_POST['login-password'];
             $result = $login->verifica($email, $password);
-            echo $result["ID"];
 
             // Se è andato a buon fine il login:
-            if (!$result) {
+            if (!(isset($result))) {
                 $login->redireziona(-1);
             } else {
                 $utente->riempi($result);

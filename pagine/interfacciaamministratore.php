@@ -7,8 +7,10 @@
     require_once $_SERVER['DOCUMENT_ROOT'].'/model/Login.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/model/Utente.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/model/Sito.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/model/Sensore.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/model/AmministrazioneCliente.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/model/AmministrazioneSito.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/model/AmministrazioneSensore.php';
 
 function gestisciClienti() {
     $db = ManagerDB::getInstance();
@@ -55,9 +57,33 @@ function gestisciSiti() {
     if (!count($lista_siti) == 0) {
         foreach ($lista_siti as $sito) {
             echo "<tr>";
-            echo "<td><a class=\"btn\" id='" . $sito->__get("ID") . "'>" . $sito->__get("Nome") . "</a></td>";
+            echo "<td><a href='index.php?action=pannelloamministratore&section=Sensori&azione=mostrasensori&IDSito=".$sito->__get("ID")."' class=\"btn\" id='" . $sito->__get("ID") . "'>" . $sito->__get("Nome") . "</a></td>";
             echo "<td>" . $sito->__get("Grandezza") . "</td>";
             echo "<td>" . $sito->__get("Localita") . "</td>";
+            echo "</tr>";
+        }
+    }
+    echo '</tbody></table>';
+}
+
+function gestisciSensori() {
+    $db = ManagerDB::getInstance();
+    $amministrazioneSensore = new AmministrazioneSensore($db);
+    $lista_sensori = $amministrazioneSensore->trovaSensore((int)$_GET['IDSito']);
+    $header_tabella = array("ID", "Marca", "Tipo");
+
+    // Stampa intestazione
+    echo '<tr>';
+    foreach($header_tabella as $value)
+        echo '<td>'.$value.'</td>';
+    echo '</tr></thead><tbody>';
+
+    if (!count($lista_sensori) == 0) {
+        foreach ($lista_sensori as $sensore) {
+            echo "<tr>";
+            echo "<td><a class=\"btn\" id='" . $sensore->__get("ID") . "'>" . $sensore->__get("Nome") . "</a></td>";
+            echo "<td>" . $sensore->__get("Grandezza") . "</td>";
+            echo "<td>" . $sensore->__get("Localita") . "</td>";
             echo "</tr>";
         }
     }
@@ -106,8 +132,11 @@ function gestisciSiti() {
                         $db = ManagerDB::getInstance();
                         $amministrazioneCliente = new AmministrazioneCliente($db);
                         $amministrazioneSito = new AmministrazioneSito($db);
+                        $amminiazioneSensore = new AmministrazioneSensore($db);
                         $sito = new Sito();
                         $utente = new Utente();
+                        $sensore = new Sensore();
+
                         if (isset($_GET['section'])) {
                                 switch ($_GET['section']) {
                                     case "Cliente":
@@ -156,7 +185,19 @@ function gestisciSiti() {
                                         break;
                                     // Gestione dei sensori
                                     case "Sensori":
-                                        switch($_GET['azione']) {}
+                                        switch($_GET['azione']) {
+                                            case "aggiungisensore":
+                                                foreach ($_POST as $key => $value) {
+                                                    $sito->__set($key, $value);
+                                                }
+                                                $amministrazioneSensore->aggiungiSensore($sensore);
+                                                gestisciSensori();
+                                                break;
+                                            case "mostrasensori":
+                                            default:
+                                                gestisciSiti();
+                                                break;
+                                        }
                                         break;
                                 }
                             } else {
@@ -264,6 +305,47 @@ function gestisciSiti() {
             <div class="modal-body">
                 <form class="form-horizontal" method = "post" action="index.php?action=pannelloamministratore&section=Siti&IDCliente=<?php echo $_GET['IDCliente'] ?>&azione=aggiungisito">
                     <input type="hidden" name="IDCliente" value="<?php echo $_GET['IDCliente'] ?>">
+                    <div class="form-group" id="div_nome">
+                        <label for="nome" class="col-sm-2 control-label">Nome</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Nome" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group" id="div_descrizione">
+                        <label for="descrizione" class="col-sm-2 control-label">Grandezza (m*m)</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="Grandezza" placeholder=""></input>
+                        </div>
+                    </div>
+                    <div class="form-group" id="div_luogonascita">
+                        <label for="quantita" class="col-sm-2 control-label">Località</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Localita" placeholder="Bari"></input>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+                <button type="submit" class="btn btn-primary">Aggiungi</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+
+<!-- @TODO: Inserire il tutto per aggiungere un sensore, soprattutto porre attenzione ai tipi. Creare quindi le relativi
+    classi per gestire i tipi, istanziare e mostrare la lista tramite selectbox !-->
+<div class="modal fade" id="aggiungi_Sensori" tabindex="-1" role="dialog" aria-labelledby="aggiungi_Sensori" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Aggiungi sensore</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method = "post" action="index.php?action=pannelloamministratore&section=Siti&IDCliente=<?php echo $_GET['IDCliente'] ?>&azione=aggiungisito">
+                    <input type="hidden" name="IDSito" value="<?php echo $_GET['IDSito'] ?>">
                     <div class="form-group" id="div_nome">
                         <label for="nome" class="col-sm-2 control-label">Nome</label>
                         <div class="col-sm-10">

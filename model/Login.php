@@ -14,6 +14,7 @@
             $parametri = array();
             $parametri[':emailAddress'] = $emailAddress;
             $parametri[':password'] = $password;
+            var_dump($parametri);
             $result = $this->db->query("SELECT * FROM Utente WHERE Email = :emailAddress AND Password = :password", $parametri);
             if (isset($result[0]) && ($result[0]["ID"] > 0))
                 return $result[0];
