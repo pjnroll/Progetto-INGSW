@@ -13,7 +13,6 @@ class Utente {
     private $Email;
     private $Password;
     private $isAdmin;
-// @TODO: eliminare isAdmin come metodo, basta fare _get(isAdmin)!
 
     public function __get($var) {
         return $this->$var;
@@ -23,21 +22,11 @@ class Utente {
         $this->$var = $val;
     }
 
+    // Dato un array contenente i dati del cliente, riempie gli attributi dell'oggetto
     public function riempi($datiUtente) {
         // Per ogni indice che corrisponde al nome degli attributi dell'oggetto Utente, inserisco i relativi valori.
-
         foreach ($datiUtente as $key => $value) {
             $this->__set($key, $value);
         }
-    }
-
-    public function isLogged() {
-        if(isset($_SESSION["USER"]) AND $_SESSION["USER"]["id"] > 0) return true;
-        else return false;
-    }
-
-    public function isAdmin() {
-        if ($this->isAdmin == 1 ) return true;
-        else return false;
     }
 }

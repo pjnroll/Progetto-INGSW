@@ -18,7 +18,6 @@
         if ($_GET['action'] == 'verificaLogin') {
             $email = $_POST['login-mail'];
             $password = $_POST['login-password'];
-
             $result = $login->verifica($email, $password);
             echo $result["ID"];
             // Se è andato a buon fine il login:
@@ -29,7 +28,6 @@
                 $_SESSION["UTENTE"] = $result;
                 $login->redireziona($utente->__get(isAdmin));
             }
-
         }
     }
 ?>

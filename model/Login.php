@@ -15,7 +15,6 @@
             $parametri[':emailAddress'] = $emailAddress;
             $parametri[':password'] = $password;
             $result = $this->db->query("SELECT * FROM Utente WHERE Email = :emailAddress AND Password = :password", $parametri);
-            var_dump($result);
             if (isset($result) && ($result["ID"] > 0))
                 return $result;
             else return false;
@@ -34,12 +33,5 @@
                 header('Location: /index.php?action=loginfailed');
             ob_end_flush();
         }
-
-        function logout() {
-            session_destroy();
-            $this->redireziona();
-        }
-
-
     }
 ?>
