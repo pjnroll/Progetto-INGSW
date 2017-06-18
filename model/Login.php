@@ -8,15 +8,15 @@
         }
 
         function verifica($emailAddress, $password_) {
-            $password = hash('sha256', $password_);
+            $password = md5($password_);
 
             // Preparo ed eseguo la query
             $parametri = array();
             $parametri[':emailAddress'] = $emailAddress;
             $parametri[':password'] = $password;
             $result = $this->db->query("SELECT * FROM Utente WHERE Email = :emailAddress AND Password = :password", $parametri);
-            if (isset($result) && ($result["ID"] > 0))
-                return $result;
+            if (isset($result[0]) && ($result[0]["ID"] > 0))
+                return $result[0];
             else return false;
         }
 

@@ -22,7 +22,7 @@
             echo $result["ID"];
             // Se è andato a buon fine il login:
             if (!$result) {
-                $login->redireziona(-1);
+                #$login->redireziona(-1);
             } else {
                 $utente->riempi($result);
                 $_SESSION["UTENTE"] = $result;
