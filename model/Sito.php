@@ -6,7 +6,7 @@ class Sito
     private $IDCliente;
     private $Nome;
     private $Grandezza;
-    private $Località;W
+    private $Località;
 
     public function __get($var) {
         return $this->$var;
