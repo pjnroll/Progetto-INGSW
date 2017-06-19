@@ -12,8 +12,8 @@
     $utente = new Utente($db);
     $login = new Login($db);
 
-    if (isset($_SESSION["UTENTE"])) {
-        $login->redireziona($_SESSION["UTENTE"]["isAdmin"]);
+    if (isset($_SESSION['UTENTE'])) {
+        $login->redireziona($_SESSION['UTENTE']['isAdmin']);
     }else {
         if ($_GET['action'] == 'verificaLogin') {
             $email = $_POST['login-mail'];
@@ -25,7 +25,7 @@
                 $login->redireziona(-1);
             } else {
                 $utente->riempi($result);
-                $_SESSION["UTENTE"] = $result;
+                $_SESSION['UTENTE'] = $result;
                 $login->redireziona($utente->__get(isAdmin));
             }
         }

@@ -29,17 +29,17 @@ date_default_timezone_set('Europe/Rome');
         <?php
         // Selettore delle pagine da importare
         // Nel caso in cui l'utente è loggato, può accedere alle varie pagine
-        if (isset($_SESSION["UTENTE"])) {
+        if (isset($_SESSION['UTENTE'])) {
             switch ($_GET['action']) {
-                case "areaclienti" :
+                case 'areaclienti' :
                     include 'pagine/areaclienti.php';
                     break;
-                case "pannelloamministratore" :
+                case 'pannelloamministratore' :
                     include 'pagine/interfacciaamministratore.php';
                     break;
                 // Se non viene esplicitamente chiesta la pagina, viene mostrata la pagina principale relativa
                 default:
-                    if ($_SESSION["UTENTE"]["isAdmin"] == "0")
+                    if ($_SESSION['UTENTE']['isAdmin'] == '0')
                         include 'pagine/areaclienti.php';
                     else
                         include 'pagine/interfacciaamministratore.php';
@@ -48,12 +48,12 @@ date_default_timezone_set('Europe/Rome');
         // Altrimenti se non è loggato, accedi al login o nel caso in cui è stato già tentato, accedi alla pagina con errore
         else {
             if (isset($_GET['action']) && $_GET['action'] == 'loginfailed') {
-                include $_SERVER["DOCUMENT_ROOT"] . '/pagine/login.php';
+                include $_SERVER['DOCUMENT_ROOT'] . '/pagine/login.php';
             }
             else
-                include $_SERVER["DOCUMENT_ROOT"].'/pagine/login.php';
+                include $_SERVER['DOCUMENT_ROOT'].'/pagine/login.php';
         }
-         ?>
+        ?>
     </div>
     </body>
 </html>

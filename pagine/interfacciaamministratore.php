@@ -1,7 +1,7 @@
 <?php
     session_start();
-    if ($_SESSION["UTENTE"]["isAdmin"] == 0) {
-        echo "Non hai i privilegi per accedere a questa pagina.";
+    if ($_SESSION['UTENTE']['isAdmin'] == 0) {
+        echo 'Non hai i privilegi per accedere a questa pagina.';
     }
     require_once $_SERVER['DOCUMENT_ROOT'].'/model/ManagerDB.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/model/Login.php';
@@ -19,8 +19,8 @@ function gestisciClienti() {
     $amministrazioneCliente = new AmministrazioneCliente($db);
     $lista_utenti = $amministrazioneCliente->trovaClienti();
 
-    $nome_sezione = "Clienti";
-    $header_tabella = array("Nominativo", "Residenza", "Luogo di nascita", "Data di nascita", "Sesso", "Numero di telefono", "Codice fiscale", "Email");
+    $nome_sezione = 'Clienti';
+    $header_tabella = array('Nominativo', 'Residenza', 'Luogo di nascita', 'Data di nascita', 'Sesso', 'Numero di telefono', 'Codice fiscale', 'Email');
 
     // Stampa intestazione
     echo '<tr>';
@@ -242,7 +242,8 @@ function gestisciTipiSensore() {
                                                 break;
                                         }
                                         break;
-
+                                    default:
+                                        break;
                                 }
                             } else {
                                 $amministrazioneCliente->trovaClienti();

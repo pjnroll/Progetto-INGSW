@@ -11,11 +11,11 @@ class AmministrazioneSensore
     public function aggiungiSensore($sensore)
     {
         $param = array();
-        $param[':ID'] = $sensore->__get("ID");
-        $param[':Marca'] = $sensore->__get("Marca");
-        $param[':Tipo'] = $sensore->__get("Tipo");
-        $param[':IDSito'] = $sensore->__get("IDSito");
-        $query = "INSERT INTO sensore (ID, Marca, Tipo, IDSito) VALUES (:ID, :Marca, :Tipo, :IDSito)";
+        $param[':ID'] = $sensore->__get('ID');
+        $param[':Marca'] = $sensore->__get('Marca');
+        $param[':Tipo'] = $sensore->__get('Tipo');
+        $param[':IDSito'] = $sensore->__get('IDSito');
+        $query = 'INSERT INTO sensore (ID, Marca, Tipo, IDSito) VALUES (:ID, :Marca, :Tipo, :IDSito)';
         $result = $this->db->query($query, $param);
         var_dump($result);
     }
@@ -23,10 +23,10 @@ class AmministrazioneSensore
     public function modificaSensore($sensore)
     {
         $param = array();
-        $param[':ID'] = $sensore->__get("ID");
-        $param[':Marca'] = $sensore->__get("Marca");
-        $param[':Tipo'] = $sensore->__get("Tipo");
-        $param[':IDSito'] = $sensore->__get("IDSito");
+        $param[':ID'] = $sensore->__get('ID');
+        $param[':Marca'] = $sensore->__get('Marca');
+        $param[':Tipo'] = $sensore->__get('Tipo');
+        $param[':IDSito'] = $sensore->__get('IDSito');
         $query = 'UPDATE sensore (Marca, Tipo, IDSito) VALUES (:Marca, :Tipo, :IDSito) WHERE ID = :ID';
         $this->db->query($query, $param);
     }
@@ -34,8 +34,8 @@ class AmministrazioneSensore
     public function eliminaSensore($sensore)
     {
         $param = array();
-        $param[':ID'] = $sensore->__get("ID");
-        $query = "DELETE * FROM sito WHERE ID = :ID";
+        $param[':ID'] = $sensore->__get('ID');
+        $query = 'DELETE * FROM sito WHERE ID = :ID';
         $this->db->query($query, $param);
 
     }
@@ -43,7 +43,7 @@ class AmministrazioneSensore
     public function trovaSensore($chiave = "", $tipoCriterio = "")
     {
         if (!isset($tipoCriterio) OR $tipoCriterio == 0) {
-            $query = "SELECT * FROM sensore WHERE ID = :chiave";
+            $query = 'SELECT * FROM sensore WHERE ID = :chiave';
             $param = array();
             $param[':chiave'] = $chiave;
             $result = $this->db->query($query, $param);

@@ -20,9 +20,9 @@
             return $result;
         }
 
-        public function __construct($server = "", $username = "", $password = "", $db = "") {
+        public function __construct($server = '', $username = '', $password = '', $db = '') {
             // Se son stati passi come parametri i dati del db, li uso per connettermi
-            if ($server != "" && $username != "" && $username != "" && password != "" && $db != "") {
+            if ($server != '' && $username != '' && $username != '' && password != '' && $db != '') {
                 $this->_db = new PDO('mysql:host='.$server.'; dbname='.$db, $username, $password);
             }
             else {

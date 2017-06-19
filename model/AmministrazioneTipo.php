@@ -14,10 +14,10 @@ class AmministrazioneTipo
     public function aggiungiTipo($tipo)
     {
         $param = array();
-        $param[':Nome'] = $tipo->__get("Nome");
-        $param[':DatiContenuti'] = $tipo->__get("DatiContenuti");
-        $param[':Posizione'] = $tipo->__get("Posizione");
-        $query = "INSERT INTO tiposensore (Nome, DatiContenuti, Posizione) VALUES (:Nome, :DatiContenuti, :Posizione)";
+        $param[':Nome'] = $tipo->__get('Nome');
+        $param[':DatiContenuti'] = $tipo->__get('DatiContenuti');
+        $param[':Posizione'] = $tipo->__get('Posizione');
+        $query = 'INSERT INTO tiposensore (Nome, DatiContenuti, Posizione) VALUES (:Nome, :DatiContenuti, :Posizione)';
         $result = $this->db->query($query, $param);
         var_dump($result);
     }
@@ -25,18 +25,18 @@ class AmministrazioneTipo
     public function modificaTipo($tipo)
     {
         $param = array();
-        $param[':Nome'] = $tipo->__get("Nome");
-        $param[':DatiContenuti'] = $tipo->__get("DatiContenuti");
-        $param[':Posizione'] = $tipo->__get("Posizione");
-        $query = "Update tiposensore (DatiContenuti, Posizione) VALUES (:DatiContenuti, :Posizione) WHERE Nome = :Nome";
+        $param[':Nome'] = $tipo->__get('Nome');
+        $param[':DatiContenuti'] = $tipo->__get('DatiContenuti');
+        $param[':Posizione'] = $tipo->__get('Posizione');
+        $query = 'Update tiposensore (DatiContenuti, Posizione) VALUES (:DatiContenuti, :Posizione) WHERE Nome = :Nome';
         $this->db->query($query, $param);
     }
 
     public function eliminaTipo($tipo)
     {
         $param = array();
-        $param[':Nome'] = $tipo->__get("Nome");
-        $query = "DELETE * FROM tiposensore WHERE ID = :ID";
+        $param[':Nome'] = $tipo->__get('Nome');
+        $query = 'DELETE * FROM tiposensore WHERE ID = :ID';
         $this->db->query($query, $param);
 
     }
@@ -44,7 +44,7 @@ class AmministrazioneTipo
     public function getTipo($chiave = "")
     {
         if (!isset($tipoCriterio)) {
-            $query = "SELECT * FROM tiposensore";
+            $query = 'SELECT * FROM tiposensore';
             $param[':chiave'] = $chiave;
             $param = array();
             $result = $this->db->query($query, $param);
