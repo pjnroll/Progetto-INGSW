@@ -21,6 +21,9 @@ class Sensore
             case "IDSito":
                 return $this->$IDSito;
                 break;
+            default:
+                return $this->$var;
+                break;
         }
     }
 
