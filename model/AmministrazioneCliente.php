@@ -75,7 +75,7 @@ class AmministrazioneCliente {
     return $utenti_trovati;
     }
 
-    private function validaEmailPassword($email, $password) {
+    function validaEmailPassword($email, $password) {
         define('PASS_MAX'  , 6);
         $param = array();
         $param[':email'] = $email;
