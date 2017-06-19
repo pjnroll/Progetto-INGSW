@@ -6,7 +6,7 @@ class AmministrazioneCliente {
     }
 
     public function aggiungiCliente($utente) {
-        if ($this->validaEmailPassword($utente->__get('Email'), $utente->__get('Password'))) {
+        if (validaEmailPassword($utente->__get('Email'), $utente->__get('Password'))) {
             $query = 'INSERT INTO utente (Nome,Cognome,Email,DataDiNascita,Sesso,Residenza,LuogoDiNascita,NumeroDiTelefono,CodiceFiscale,Password,isAdmin) VALUES (:Nome,:Cognome,:Email,:DataDiNascita,:Sesso,:Residenza,:LuogoDiNascita,:NumeroDiTelefono,:CodiceFiscale,:Password, 0)';
             $param = array();
             $param[':Nome'] = $utente->__get('Nome');
@@ -26,7 +26,7 @@ class AmministrazioneCliente {
     }
 
     public function modificaCliente($utente) {
-        if ($this->validaEmailPassword($utente->__get('Email'), $utente->__get('Password'))) {
+        if (validaEmailPassword($utente->__get('Email'), $utente->__get('Password'))) {
             $query = 'UPDATE utente (Nome,Cognome,Email,DataNascita,Sesso,Residenza,LuogoNascita,NumeroTelefono,Codicefiscale,Password) VALUES (:Nome,:Cognome,:Email,:DataDiNascita,:Sesso,:Residenza,:LuogoDiNascita,:NumeroDiTelefono,:Codicefiscale,:Password) WHERE ID = :ID';
             $param = array();
             foreach($utente as $key => $value) {
