@@ -9,7 +9,23 @@ class Sito
     private $Localita;
 
     public function __get($var) {
-        return $this->$var;
+        switch($var) {
+            case "ID":
+                return $this->$ID;
+                break;
+            case "IDCliente":
+                return $this->$IDCliente;
+                break;
+            case "Nome":
+                return $this->$Grandezza;
+                break;
+            case "Grandezza":
+                return $this->$Localita;
+                break;
+            default:
+                return $this->$var;
+                break;
+        }
     }
 
     public function __set($var, $val) {

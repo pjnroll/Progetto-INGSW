@@ -19,7 +19,6 @@ function gestisciClienti() {
     $amministrazioneCliente = new AmministrazioneCliente($db);
     $lista_utenti = $amministrazioneCliente->trovaClienti();
 
-    $nome_sezione = 'Clienti';
     $header_tabella = array('Nominativo', 'Residenza', 'Luogo di nascita', 'Data di nascita', 'Sesso', 'Numero di telefono', 'Codice fiscale', 'Email');
 
     // Stampa intestazione

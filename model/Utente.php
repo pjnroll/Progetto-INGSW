@@ -14,7 +14,29 @@ class Utente {
     private $isAdmin;
 
     public function __get($var) {
-        return $this->$var;
+        if ($var = "ID")
+            return $this->$ID;
+        if ($var = "Nome")
+            return $this->$Nome;
+        if ($var = "Cognome")
+            return $this->$Cognome;
+        if ($var = "LuogoDiNascita")
+            return $this->$LuogoDiNascita;
+        if ($var = "Sesso")
+            return $this->$Sesso;
+        if ($var = "Residenza")
+            return $this->$Residenza;
+        if ($var = "NumeroDiTelefono")
+            return $this->$NumeroDiTelefono;
+        if ($var = "CodiceFiscale")
+            return $this->$CodiceFiscale;
+        if ($var = "Email")
+            return $this->$Email;
+        if ($var = "Password")
+            return $this->$Password;
+        if ($var = "isAdmin")
+            return $this->$isAdmin;
+
     }
 
     public function __set($var, $val) {

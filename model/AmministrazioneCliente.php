@@ -42,6 +42,7 @@ class AmministrazioneCliente {
         $query = 'DELETE FROM utente WHERE ID = :ID';
         $param = array();
         $param[':ID'] = $id;
+        $this->db->query($query, $param);
     }
     public function trovaClienti($chiave = "", $tipoCriterio = "") {
         $query = 'SELECT * FROM utente WHERE isAdmin = 0';
