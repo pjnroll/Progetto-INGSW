@@ -29,16 +29,16 @@ function gestisciClienti() {
     echo '</tr></thead><tbody>';
     if (!count($lista_utenti) == 0) {
         foreach ($lista_utenti as $utente) {
-            echo "<tr>";
+            echo '<tr>';
             echo "<td><a href='index.php?action=pannelloamministratore&section=Siti&azione=mostrasiti&IDCliente=".$utente->__get("ID")."' class=\"btn\">" . $utente->__get("Nome") . " " . $utente->__get("Cognome") . "</a></td>";
-            echo "<td>" . $utente->__get("Residenza") . "</td>";
-            echo "<td>" . $utente->__get("LuogoDiNascita") . "</td>";
-            echo "<td>" . $utente->__get("DataDiNascita") . "</td>";
-            echo "<td>" . $utente->__get("Sesso") . "</td>";
-            echo "<td>" . $utente->__get("NumeroDiTelefono") . "</td>";
-            echo "<td>" . $utente->__get("CodiceFiscale") . "</td>";
-            echo "<td>" . $utente->__get("Email") . "</td>";
-            echo "</tr>";
+            echo '<td>' . $utente->__get('Residenza') . '</td>';
+            echo '<td>' . $utente->__get('LuogoDiNascita') . '</td>';
+            echo '<td>' . $utente->__get('DataDiNascita') . '</td>';
+            echo '<td>' . $utente->__get('Sesso') . '</td>';
+            echo '<td>' . $utente->__get('NumeroDiTelefono') . '</td>';
+            echo '<td>' . $utente->__get('CodiceFiscale') . '</td>';
+            echo '<td>' . $utente->__get('Email') . '</td>';
+            echo '</tr>';
         }
     }
     echo '</tbody></table>';
@@ -58,11 +58,11 @@ function gestisciSiti() {
 
     if (!count($lista_siti) == 0) {
         foreach ($lista_siti as $sito) {
-            echo "<tr>";
+            echo '<tr>';
             echo "<td><a href='index.php?action=pannelloamministratore&section=Sensori&azione=mostrasensori&IDSito=".$sito->__get("ID")."' class=\"btn\" id='" . $sito->__get("ID") . "'>" . $sito->__get("Nome") . "</a></td>";
-            echo "<td>" . $sito->__get("Grandezza") . "</td>";
-            echo "<td>" . $sito->__get("Localita") . "</td>";
-            echo "</tr>";
+            echo '<td>' . $sito->__get('Grandezza') . '</td>';
+            echo '<td>' . $sito->__get('Localita') . '</td>';
+            echo '</tr>';
         }
     }
     echo '</tbody></table>';
@@ -82,11 +82,11 @@ function gestisciSensori() {
 
     if (!count($lista_sensori) == 0) {
         foreach ($lista_sensori as $sensore) {
-            echo "<tr>";
+            echo '<tr>';
             echo "<td><a class=\"btn\" id='" . $sensore->__get("ID") . "'>" . $sensore->__get("Nome") . "</a></td>";
-            echo "<td>" . $sensore->__get("Grandezza") . "</td>";
-            echo "<td>" . $sensore->__get("Localita") . "</td>";
-            echo "</tr>";
+            echo '<td>' . $sensore->__get('Grandezza') . '</td>';
+            echo '<td>' . $sensore->__get('Localita') . '</td>';
+            echo '</tr>';
         }
     }
     echo '</tbody></table>';
@@ -106,11 +106,11 @@ function gestisciTipiSensore() {
 
     if (!count($lista_tipi) == 0) {
         foreach ($lista_tipi as $tipo) {
-            echo "<tr>";
-            echo "<td>" . $tipo->__get("Nome") . "</td>";
-            echo "<td>" . $tipo->__get("DatiContenuti") . "</td>";
-            echo "<td>" . $tipo->__get("Posizione") . "</td>";
-            echo "</tr>";
+            echo '<tr>';
+            echo '<td>' . $tipo->__get('Nome') . '</td>';
+            echo '<td>' . $tipo->__get('DatiContenuti') . '</td>';
+            echo '<td>' . $tipo->__get('Posizione') . '</td>';
+            echo '</tr>';
         }
     }
     echo '</tbody></table>';

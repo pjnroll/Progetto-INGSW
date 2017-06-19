@@ -1,5 +1,4 @@
 <?php
-session_start();
 class Utente {
     private $ID = 0;
     private $Nome;

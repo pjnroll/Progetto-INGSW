@@ -1,7 +1,6 @@
 <?php
 class AmministrazioneCliente {
     private $db;
-
     function __construct($DB) {
         $this->db = $DB;
     }
@@ -77,11 +76,12 @@ class AmministrazioneCliente {
     }
 
     private function validaEmailPassword($email, $password) {
+        define("PASS_MAX", 6);
         $param = array();
         $param[':email'] = $email;
         $result = $this->db->query("SELECT * FROM utente WHERE Email = :email", $param);
 
-        if(!isset($result[0]) && (strlen($password) >= 6)) return true;
+        if(!isset($result[0]) && (strlen($password) >= PASS_MAX)) return true;
         else return false;
     }
 }
