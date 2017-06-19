@@ -11,7 +11,7 @@
         }
 
         // Metodo per gestire le query, a cui viene passata la query parametrizzata e le variabili da inserire nei param
-        public function query($sql, $varset) {
+        public function query($sql, $varset = "") {
             $statement = $this->_db->prepare($sql);
             // Esegue query
             $statement->execute($varset);

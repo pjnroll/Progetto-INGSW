@@ -8,9 +8,11 @@
     require_once $_SERVER['DOCUMENT_ROOT'].'/model/Utente.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/model/Sito.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/model/Sensore.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/model/Tipo.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/model/AmministrazioneCliente.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/model/AmministrazioneSito.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/model/AmministrazioneSensore.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/model/AmministrazioneTipo.php';
 
 function gestisciClienti() {
     $db = ManagerDB::getInstance();
@@ -90,6 +92,30 @@ function gestisciSensori() {
     echo '</tbody></table>';
 }
 
+function gestisciTipiSensore() {
+    $db = ManagerDB::getInstance();
+    $amministrazioneTipo = new AmministrazioneTipo($db);
+    $lista_tipi = $amministrazioneTipo->getTipo();
+    $header_tabella = array("Nome", "Dati Contenuti", "Posizione");
+
+    // Stampa intestazione
+    echo '<tr>';
+    foreach($header_tabella as $value)
+        echo '<td>'.$value.'</td>';
+    echo '</tr></thead><tbody>';
+
+    if (!count($lista_tipi) == 0) {
+        foreach ($lista_tipi as $tipo) {
+            echo "<tr>";
+            echo "<td>" . $tipo->__get("Nome") . "</td>";
+            echo "<td>" . $tipo->__get("DatiContenuti") . "</td>";
+            echo "<td>" . $tipo->__get("Posizione") . "</td>";
+            echo "</tr>";
+        }
+    }
+    echo '</tbody></table>';
+}
+
 ?>
 <div class = "form-group col-md-12" style = "left : 4%;">
     <ul id="profilo" class="list-group">
@@ -132,11 +158,12 @@ function gestisciSensori() {
                         $db = ManagerDB::getInstance();
                         $amministrazioneCliente = new AmministrazioneCliente($db);
                         $amministrazioneSito = new AmministrazioneSito($db);
-                        $amminiazioneSensore = new AmministrazioneSensore($db);
+                        $amministrazioneSensore = new AmministrazioneSensore($db);
+                        $amministrazioneTipo = new AmministrazioneTipo($db);
                         $sito = new Sito();
                         $utente = new Utente();
                         $sensore = new Sensore();
-
+                        $tipo = new Tipo();
                         if (isset($_GET['section'])) {
                                 switch ($_GET['section']) {
                                     case "Cliente":
@@ -199,6 +226,23 @@ function gestisciSensori() {
                                                 break;
                                         }
                                         break;
+                                    // Gestione dei tipi
+                                    case "Tipi":
+                                        switch($_GET['azione']) {
+                                            case "aggiungitipo":
+                                                foreach ($_POST as $key => $value) {
+                                                    $tipo->__set($key, $value);
+                                                }
+                                                $amministrazioneTipo->aggiungiTipo($tipo);
+                                                gestisciTipi();
+                                                break;
+                                            case "mostratipi":
+                                            default:
+                                                gestiscitipi();
+                                                break;
+                                        }
+                                        break;
+
                                 }
                             } else {
                                 $amministrazioneCliente->trovaClienti();
@@ -344,8 +388,51 @@ function gestisciSensori() {
                 <h4 class="modal-title">Aggiungi sensore</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" method = "post" action="index.php?action=pannelloamministratore&section=Siti&IDCliente=<?php echo $_GET['IDCliente'] ?>&azione=aggiungisito">
+                <form class="form-horizontal" method = "post" action="index.php?action=pannelloamministratore&section=Siti&IDSito=<?php echo $_GET['IDSito'] ?>&azione=aggiungisito">
                     <input type="hidden" name="IDSito" value="<?php echo $_GET['IDSito'] ?>">
+                    <div class="form-group" id="div_descrizione">
+                        <label for="descrizione" class="col-sm-2 control-label">ID</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="ID" placeholder=""></input>
+                        </div>
+                    </div>
+                    <div class="form-group" id="div_luogonascita">
+                        <label for="quantita" class="col-sm-2 control-label">Marca</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Localita" placeholder="Bari"></input>
+                        </div>
+                    </div>
+                    <div class="form-group" id="div_tipo">
+                        <label for="quantita" class="col-sm-2 control-label">Tipo</label>
+                        <div class="col-sm-10">
+                            <select name="Tipo">
+                                <?php
+                                    $tipi = $amministrazioneTipo->getTipo();
+                                    foreach($tipi as $tipo) {
+                                        echo "<option id='".$amministrazioneTipo->__get("Nome")."'>".$amministrazioneTipo->__get("Nome")." </option>'";
+                                    }?>
+                            </select>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+                <button type="submit" class="btn btn-primary">Aggiungi</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="aggiungi_Tipi" tabindex="-1" role="dialog" aria-labelledby="aggiungi_Tipi" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Aggiungi tipo</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method = "post" action="index.php?action=pannelloamministratore&section=Tipi&azione=aggiungitipo">
                     <div class="form-group" id="div_nome">
                         <label for="nome" class="col-sm-2 control-label">Nome</label>
                         <div class="col-sm-10">
@@ -353,13 +440,13 @@ function gestisciSensori() {
                         </div>
                     </div>
                     <div class="form-group" id="div_descrizione">
-                        <label for="descrizione" class="col-sm-2 control-label">Grandezza (m*m)</label>
+                        <label for="descrizione" class="col-sm-2 control-label">Dati (formato CSV) (m*m)</label>
                         <div class="col-sm-10">
                             <input type="number" class="form-control" name="Grandezza" placeholder=""></input>
                         </div>
                     </div>
                     <div class="form-group" id="div_luogonascita">
-                        <label for="quantita" class="col-sm-2 control-label">Località</label>
+                        <label for="quantita" class="col-sm-2 control-label">Posizione (Dato:</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="Localita" placeholder="Bari"></input>
                         </div>

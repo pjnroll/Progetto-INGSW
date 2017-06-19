@@ -1,10 +1,10 @@
 <?php
 
-class TipoSensore
+class Tipo
 {
-    private $nome;
-    private $datiContenuti;
-    private $posizione;
+    private $Nome;
+    private $DatiContenuti;
+    private $Posizione;
 
     public function __get($var) {
         return $this->$var;
